@@ -1,40 +1,41 @@
 <template>
     <div>
       <input
-        v-model="todo.title"
+       v-model="todo.title"
         placeholder="Add title"
         class="user-input"
       />
+   
       <textarea
         name="todo"
         rows="5"
-        v-model="todo.comment"
+       v-model="todo.comment"
         placeholder="Add comment"
         class="user-textarea"
       ></textarea>
-      <button @click="addTodo(todo)" class="add-btn">Add todo</button>
+      <button @click="editTodo(todo)" class="add-btn">Edit todo</button>
+      
     </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 export default {
-  name: "new-todo",
+  name: "edit-todo",
   data() {
     return {
-      todo: {
-        id: Date.now(),
-        completed: "",
-        title: "",
-        comment: "",
-      },
-    };
+      todo: {}
+    }
   },
   methods: {
-    addTodo() {
-      this.$store.dispatch("addTodo", this.todo);
+    editTodo() {
+      this.$store.dispatch("editTodo", this.todo);
       this.$router.go(-1);
     },
+  },
+  mounted() {
+    const todoFinded = this.todos.find(task => task.id === this.$route.params.todoId)
+    this.todo = todoFinded
   },
   computed: {
       ...mapState(["todos"]),

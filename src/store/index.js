@@ -9,6 +9,11 @@ export default new Vuex.Store({
     todos,
   },
   mutations: {
+    editTodo(state, todo) {
+      let updatedTodos = state.todos.filter((item) => item.id != todo.id);
+      state.todos = updatedTodos;
+      state.todos.push(todo);
+    },
     finishEdit(state, todo) {
       state.todos.splice(todo.index, 1, todo.todo);
     },
@@ -24,6 +29,9 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    editTodo({ commit }, todo) {
+      commit("editTodo", todo);
+    },
     finishEdit({ commit }, todo) {
       commit("finishEdit", todo);
     },

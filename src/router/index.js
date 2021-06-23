@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import TodoList from "../components/TodoList.vue";
 import TodoNew from "../views/TodoNew.vue";
+import TodoEdit from "../views/TodoEdit.vue";
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ const routes = [
     path: "/new",
     name: "new-todo",
     component: TodoNew,
+  },
+  {
+    path: "/todo/:todoId",
+    name: "edit-todo",
+    component: TodoEdit,
   },
 ];
 

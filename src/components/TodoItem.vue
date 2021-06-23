@@ -6,8 +6,11 @@
         <div
           class="todo-item-label"
           :class="{ completed: completed }"
+          @click="editTodo(todo)"
         >
+        <router-link :to="{ name: 'edit-todo', params: { todoId: todo.id } }">
           {{ todo.title }}
+        </router-link>
         </div>
       </div>
       <div class="remove-item" @click="removeTodo(todo.id)">
@@ -41,6 +44,7 @@ export default {
       title: this.todo.title,
       completed: this.todo.completed,
       comment: this.todo.comment,
+      editing: this.todo.editing
     };
   },
   watch: {
@@ -56,7 +60,10 @@ export default {
     removeTodo(todoId) {
       this.$store.dispatch("removeTodo", todoId);
     },
-   
+    editTodo(todo) {
+        this.todo.editing = true
+        this.$store.dispatch("editTodo", todo);
+    },
     doneEdit() {
      this.$store.dispatch("finishEdit",  {
         index: this.index,
@@ -70,6 +77,7 @@ export default {
     
     },
   },
+
 };
 </script>
 
@@ -77,5 +85,9 @@ export default {
 p {
   font-size: 16px;
   margin-left: 50px;
+}
+a {
+    text-decoration: none;
+    color: inherit;
 }
 </style>

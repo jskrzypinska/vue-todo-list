@@ -111,9 +111,7 @@ export default {
       this.$store.dispatch("clearCompleted");
     },
 
-    // finishedEdit(data) {
-    //   this.todos.splice(data.index, 1, data.todo);
-    // },
+
   },
   computed: {
     ...mapState(["todos"]),
